@@ -24,11 +24,11 @@ typedef struct
 
 void ingresarDatosIniciales(Zona[], int *datosIngresados);
 void ingresarDatosHistoricos(Zona[], int *datosHistoricosIngresados);
-void monitorearActual(Zona[], int datosIngresados);
+void inspeccionarDatosActuales(Zona[], int datosIngresados);
 void predecirContaminacion(Zona[], int datosHistoricosIngresados);
 void calcularPromedios(Zona[], int datosHistoricosIngresados);
-void emitirAlertas(Zona[], int datosIngresados, int datosHistoricosIngresados);
-void generarRecomendaciones(Zona[], int datosIngresados, int datosHistoricosIngresados);
+void alertarContaminacion(Zona[], int datosIngresados, int datosHistoricosIngresados);
+void recomendarMejoras(Zona[], int datosIngresados, int datosHistoricosIngresados);
 void exportarReporte(Zona[], int datosIngresados, int datosHistoricosIngresados);
 
 int main()
@@ -63,7 +63,7 @@ int main()
             ingresarDatosHistoricos(zonas, &datosHistoricosIngresados);
             break;
         case 3:
-            monitorearActual(zonas, datosIngresados);
+            inspeccionarDatosActuales(zonas, datosIngresados);
             break;
         case 4:
             predecirContaminacion(zonas, datosHistoricosIngresados);
@@ -72,10 +72,10 @@ int main()
             calcularPromedios(zonas, datosHistoricosIngresados);
             break;
         case 6:
-            emitirAlertas(zonas, datosIngresados, datosHistoricosIngresados);
+            alertarContaminacion(zonas, datosIngresados, datosHistoricosIngresados);
             break;
         case 7:
-            generarRecomendaciones(zonas, datosIngresados, datosHistoricosIngresados);
+            recomendarMejoras(zonas, datosIngresados, datosHistoricosIngresados);
             break;
         case 8:
             exportarReporte(zonas, datosIngresados, datosHistoricosIngresados);
@@ -141,7 +141,7 @@ void ingresarDatosHistoricos(Zona zonas[], int *datosHistoricosIngresados)
     printf("\nDatos históricos ingresados correctamente.\n");
 }
 
-void monitorearActual(Zona zonas[], int datosIngresados)
+void inspeccionarDatosActuales(Zona zonas[], int datosIngresados)
 {
     if (datosIngresados == 0)
     {
@@ -244,7 +244,7 @@ void calcularPromedios(Zona zonas[], int datosHistoricosIngresados)
     }
 }
 
-void emitirAlertas(Zona zonas[], int datosIngresados, int datosHistoricosIngresados)
+void alertarContaminacion(Zona zonas[], int datosIngresados, int datosHistoricosIngresados)
 {
     if (datosIngresados==0 || datosHistoricosIngresados==0)
     {
@@ -286,7 +286,7 @@ void emitirAlertas(Zona zonas[], int datosIngresados, int datosHistoricosIngresa
     }
 }
 
-void generarRecomendaciones(Zona zonas[], int datosIngresados, int datosHistoricosIngresados)
+void recomendarMejoras(Zona zonas[], int datosIngresados, int datosHistoricosIngresados)
 {
     if (datosIngresados==0 || datosHistoricosIngresados==0)
     {
