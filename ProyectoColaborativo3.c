@@ -99,19 +99,19 @@ void ingresarDatosIniciales(Zona zonas[], int *datosIngresados)
         fgets(zonas[i].nombre, sizeof(zonas[i].nombre), stdin);
         zonas[i].nombre[strcspn(zonas[i].nombre, "\n")] = '\0';
 
-        printf("Ingrese el nivel de CO2 para la zona %s: ", zonas[i].nombre);
+        printf("Ingrese el nivel de CO2(ppm) para la zona %s: ", zonas[i].nombre);
         scanf("%f", &zonas[i].nivelesActuales[0]);
         getchar();
 
-        printf("Ingrese el nivel de SO2 para la zona %s: ", zonas[i].nombre);
+        printf("Ingrese el nivel de SO2(ug/m3) para la zona %s: ", zonas[i].nombre);
         scanf("%f", &zonas[i].nivelesActuales[1]);
         getchar();
 
-        printf("Ingrese el nivel de NO2 para la zona %s: ", zonas[i].nombre);
+        printf("Ingrese el nivel de NO2(ug/m3) para la zona %s: ", zonas[i].nombre);
         scanf("%f", &zonas[i].nivelesActuales[2]);
         getchar();
 
-        printf("Ingrese el nivel de PM2.5 para la zona %s: ", zonas[i].nombre);
+        printf("Ingrese el nivel de PM2.5(ug/m3) para la zona %s: ", zonas[i].nombre);
         scanf("%f", &zonas[i].nivelesActuales[3]);
         getchar();
     }
@@ -158,13 +158,13 @@ void inspeccionarDatosActuales(Zona zonas[], int datosIngresados)
         printf("  PM2.5: %.2f\n", zonas[i].nivelesActuales[3]);
 
         if (zonas[i].nivelesActuales[0] > LIMITE_CO2_ACTUAL)
-            printf("  Alerta: El nivel de CO2 excede el límite permitido de %.2f.\n", LIMITE_CO2_ACTUAL);
+            printf("Advertencia. El nivel de CO2 excede el límite permitido de %.2f.\n", LIMITE_CO2_ACTUAL);
         if (zonas[i].nivelesActuales[1] > LIMITE_SO2_ACTUAL)
-            printf("  Alerta: El nivel de SO2 excede el límite permitido de %.2f.\n", LIMITE_SO2_ACTUAL);
+            printf("Advertencia. El nivel de SO2 excede el límite permitido de %.2f.\n", LIMITE_SO2_ACTUAL);
         if (zonas[i].nivelesActuales[2] > LIMITE_NO2_ACTUAL)
-            printf("  Alerta: El nivel de NO2 excede el límite permitido de %.2f.\n", LIMITE_NO2_ACTUAL);
+            printf("Advertencia. El nivel de NO2 excede el límite permitido de %.2f.\n", LIMITE_NO2_ACTUAL);
         if (zonas[i].nivelesActuales[3] > LIMITE_PM25_ACTUAL)
-            printf("  Alerta: El nivel de PM2.5 excede el límite permitido de %.2f.\n", LIMITE_PM25_ACTUAL);
+            printf("Advertencia. El nivel de PM2.5 excede el límite permitido de %.2f.\n", LIMITE_PM25_ACTUAL);
     }
 }
 
@@ -197,19 +197,19 @@ void predecirContaminacion(Zona zonas[], int datosHistoricosIngresados)
 
         if (zonas[i].prediccion[0] > LIMITE_CO2_ACTUAL)
         {
-            printf("  Alerta: Predicción de CO2 excede el límite permitido de %.2f.\n", LIMITE_CO2_ACTUAL);
+            printf("La predicción de CO2 excede el límite permitido de %.2f.\n", LIMITE_CO2_ACTUAL);
         }
         if (zonas[i].prediccion[1] > LIMITE_SO2_ACTUAL)
         {
-            printf("  Alerta: Predicción de SO2 excede el límite permitido de %.2f.\n", LIMITE_SO2_ACTUAL);
+            printf("La predicción de SO2 excede el límite permitido de %.2f.\n", LIMITE_SO2_ACTUAL);
         }
         if (zonas[i].prediccion[2] > LIMITE_NO2_ACTUAL)
         {
-            printf("  Alerta: Predicción de NO2 excede el límite permitido de %.2f.\n", LIMITE_NO2_ACTUAL);
+            printf("La predicción de NO2 excede el límite permitido de %.2f.\n", LIMITE_NO2_ACTUAL);
         }
         if (zonas[i].prediccion[3] > LIMITE_PM25_ACTUAL)
         {
-            printf("  Alerta: Predicción de PM2.5 excede el límite permitido de %.2f.\n", LIMITE_PM25_ACTUAL);
+            printf("La predicción de PM2.5 excede el límite permitido de %.2f.\n", LIMITE_PM25_ACTUAL);
         }
     }
 }
@@ -237,10 +237,10 @@ void calcularPromedios(Zona zonas[], int datosHistoricosIngresados)
             promedios[j] /= DIAS_HISTORICOS;
         }
 
-        printf("  Promedio CO2: %.2f (Límite OMS: %.2f)\n", promedios[0], LIMITE_CO2_OMS);
-        printf("  Promedio SO2: %.2f (Límite OMS: %.2f)\n", promedios[1], LIMITE_SO2_OMS);
-        printf("  Promedio NO2: %.2f (Límite OMS: %.2f)\n", promedios[2], LIMITE_NO2_OMS);
-        printf("  Promedio PM2.5: %.2f (Límite OMS: %.2f)\n", promedios[3], LIMITE_PM25_OMS);
+        printf("Promedio CO2: %.2f (Límite OMS: %.2f)\n", promedios[0], LIMITE_CO2_OMS);
+        printf("Promedio SO2: %.2f (Límite OMS: %.2f)\n", promedios[1], LIMITE_SO2_OMS);
+        printf("Promedio NO2: %.2f (Límite OMS: %.2f)\n", promedios[2], LIMITE_NO2_OMS);
+        printf("Promedio PM2.5: %.2f (Límite OMS: %.2f)\n", promedios[3], LIMITE_PM25_OMS);
     }
 }
 
@@ -252,7 +252,7 @@ void alertarContaminacion(Zona zonas[], int datosIngresados, int datosHistoricos
         return;
     }
 
-    printf("\nAlertas preventivas:\n");
+    printf("\nAlertas de contaminacion:\n");
     for (int i = 0; i < NUM_ZONAS; i++)
     {
         printf("Zona: %s\n", zonas[i].nombre);
@@ -260,26 +260,26 @@ void alertarContaminacion(Zona zonas[], int datosIngresados, int datosHistoricos
 
         if (zonas[i].nivelesActuales[0] > LIMITE_CO2_OMS)
         {
-            printf("  Alerta: CO2 excede el límite permitido.\n");
+            printf("*CO2 excede el límite permitido.\n");
             alertaEmitida = 1;
         }
         if (zonas[i].nivelesActuales[1] > LIMITE_SO2_OMS)
         {
-            printf("  Alerta: SO2 excede el límite permitido.\n");
+            printf("*SO2 excede el límite permitido.\n");
             alertaEmitida = 1;
         }
         if (zonas[i].nivelesActuales[2] > LIMITE_NO2_OMS)
         {
-            printf("  Alerta: NO2 excede el límite permitido.\n");
+            printf("*NO2 excede el límite permitido.\n");
             alertaEmitida = 1;
         }
         if (zonas[i].nivelesActuales[3] > LIMITE_PM25_OMS)
         {
-            printf("  Alerta: PM2.5 excede el límite permitido.\n");
+            printf("*PM2.5 excede el límite permitido.\n");
             alertaEmitida = 1;
         }
 
-        if (!alertaEmitida)
+        if (alertaEmitida!=0)
         {
             printf("  Todos los niveles están dentro de los límites aceptables.\n");
         }
@@ -301,19 +301,19 @@ void recomendarMejoras(Zona zonas[], int datosIngresados, int datosHistoricosIng
 
         if (zonas[i].nivelesActuales[0] > LIMITE_CO2_OMS)
         {
-            printf("  Reducir emisiones de CO2: promover transporte público y energías renovables.\n");
+            printf("Reducir niveles de CO2: promover transporte público y energías renovables.\n");
         }
         if (zonas[i].nivelesActuales[1] > LIMITE_SO2_OMS)
         {
-            printf("  Reducir emisiones de SO2: mejorar combustibles industriales.\n");
+            printf("Reducir niveles de SO2: mejorar combustibles industriales.\n");
         }
         if (zonas[i].nivelesActuales[2] > LIMITE_NO2_OMS)
         {
-            printf("  Reducir emisiones de NO2: optimizar sistemas de transporte.\n");
+            printf("Reducir niveles de NO2: optimizar sistemas de transporte.\n");
         }
         if (zonas[i].nivelesActuales[3] > LIMITE_PM25_OMS)
         {
-            printf("  Reducir partículas PM2.5: regular actividades de construcción y quema de biomasa.\n");
+            printf("Reducir niveles PM2.5: regular actividades de construcción y quema de biomasa.\n");
         }
     }
 }
